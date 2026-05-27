@@ -1,0 +1,86 @@
+
+/* === VARIABLES GLOBALES === */
+:root {
+  --couleur-principale: #6C63FF;
+  --couleur-texte:      #1a1a2e;
+  --couleur-fond:       #f8f8ff;
+  --police:             'Segoe UI', sans-serif;
+}
+/* === RESET DE BASE === */
+* {
+  margin:     0;
+  padding:    0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--police);
+  background:  var(--couleur-fond);
+  color:       var(--couleur-texte);
+}
+/* === SECTION HERO === */
+.hero {
+  min-height:      100vh;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  background:      linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  text-align:      center;
+  padding:         40px;
+}
+.hero-salut {
+  color:          var(--couleur-principale);
+  font-size:      1.1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom:  12px;
+}
+.hero h1 {
+  font-size:    4rem;
+  font-weight:  700;
+  color:        #ffffff;
+  margin-bottom: 8px;
+}
+.hero h2 {
+  font-size:    1.4rem;
+  font-weight:  300;
+  color:        #a0a8c0;
+  margin-bottom: 20px;
+}
+.hero-desc {
+  color:      #8892a4;
+  font-size:  1rem;
+  max-width:  500px;
+  margin:     0 auto 32px;
+  line-height: 1.6;
+}
+/* === BOUTONS === */
+.hero-btns {
+  display:   flex;
+  gap:       16px;
+  justify-content: center;
+}
+.btn-primary, .btn-secondary {
+  padding:         14px 32px;
+  border-radius:   8px;
+  font-size:       1rem;
+  text-decoration: none;
+  font-weight:     600;
+  transition:      all 0.3s ease;
+}
+.btn-primary {
+  background: var(--couleur-principale);
+  color:      #ffffff;
+}
+.btn-primary:hover {
+  background:  #5a52d5;
+  transform:   translateY(-2px);
+}
+.btn-secondary {
+  background:    transparent;
+  color:         #ffffff;
+  border:        2px solid #ffffff;
+}
+.btn-secondary:hover {
+  background:  rgba(255,255,255,0.1);
+  transform:   translateY(-2px);
+}
