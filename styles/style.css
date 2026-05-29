@@ -204,3 +204,172 @@ body {
   flex-direction: column;
   text-align: center;
 }
+
+/* === EXPERIENCE SECTION === */
+.experiences {
+  padding:    100px 0;
+  background: #ffffff;
+}
+/* Chaque ligne de la timeline */
+.timeline-item {
+  display:  flex;
+  gap:      28px;
+  min-height: 160px;
+}
+/* Colonne gauche : logo + ligne verticale */
+.timeline-gauche {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  flex-shrink:    0;     /* ne rétrécit jamais */
+}
+/* Le carré contenant le logo */
+.logo-entreprise {
+  width:         60px;
+  height:        60px;
+  border-radius: 12px;
+  border:        2px solid #e8e8f0;
+  background:    #fff;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  padding:       8px;
+  flex-shrink:   0;
+}
+.logo-entreprise img {
+  width:      100%;
+  height:     100%;
+  object-fit: contain;  /* garde les proportions du logo */
+}
+/* La ligne verticale entre deux logos */
+.timeline-ligne {
+  width:      2px;
+  flex:       1;          /* s'étire pour remplir l'espace restant */
+  background: linear-gradient(to bottom, #6C63FF, #e8e8f0);
+  margin-top: 8px;
+  border-radius: 2px;
+}
+/* Masquer la ligne du dernier item */
+.timeline-item:last-child .timeline-ligne {
+  display: none;
+}
+/* Colonne droite : contenu */
+.timeline-contenu {
+  padding-bottom: 40px;
+  flex:           1;  /* prend tout l'espace horizontal restant */
+}
+/* Header : poste à gauche, date à droite */
+.exp-header {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     flex-start;
+  margin-bottom:   12px;
+  gap:             12px;
+}
+.exp-poste {
+  font-size:   1.1rem;
+  font-weight: 700;
+  color:       var(--couleur-texte);
+}
+.exp-entreprise {
+  font-size:   0.9rem;
+  color:       var(--couleur-principale);
+  font-weight: 500;
+  margin-top:  2px;
+}
+.exp-date {
+  font-size:    0.8rem;
+  color:        #888;
+  background:   var(--couleur-fond);
+  padding:      4px 10px;
+  border-radius: 99px;
+  white-space:  nowrap;   /* ne se coupe pas en 2 lignes */
+  flex-shrink:  0;
+}
+.exp-description {
+  color:         #555;
+  font-size:     0.95rem;
+  line-height:   1.7;
+  margin-bottom: 14px;
+}
+/* Badges de compétences */
+.exp-tags {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       8px;
+}
+.exp-tag {
+  background:    rgba(108,99,255,0.08);
+  color:         var(--couleur-principale);
+  font-size:     0.75rem;
+  font-weight:   600;
+  padding:       4px 12px;
+  border-radius: 99px;
+}
+
+
+/* === COMPETENCE SECTION === */
+.competences {
+  padding:    100px 0;
+  background: var(--couleur-fond);
+}
+/* 3 equals column for the 3 parts */
+.comp-grille {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   28px;
+}
+
+/* The card of each part or category */
+.comp-bloc {
+  background:    #ffffff;
+  border-radius: 16px;
+  padding:       32px 28px;
+  box-shadow:    0 4px 24px rgba(0,0,0,0.06);
+  border-top:    3px solid var(--couleur-principale);
+  transition:    transform 0.3s ease, box-shadow 0.3s ease;
+}
+.comp-bloc:hover {
+  transform:  translateY(-6px);
+  box-shadow: 0 16px 40px rgba(108,99,255,0.12);
+}
+.comp-titre {
+  font-size:     0.8rem;
+  font-weight:   700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color:         var(--couleur-principale);
+  margin-bottom: 24px;
+}
+
+/* Grille flexible pour les icônes : s'adapte au nombre */
+.icones-grille {
+  display:         flex;
+  flex-wrap:       wrap;
+  gap:             16px;
+}
+/* Icone and label */
+.icone-item {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            8px;
+  padding:       12px;
+  border-radius:  10px;
+  transition:     background 0.2s ease, transform 0.2s ease;
+  cursor:         default;
+}
+.icone-item:hover {
+  background:  var(--couleur-fond);
+  transform:   translateY(-4px);
+}
+/* Icone itself (via Devicon) */
+.icone-item i {
+  font-size: 2.8rem;
+}
+/* Label under the icon */
+.icone-item span {
+  font-size:   0.75rem;
+  color:       #666;
+  font-weight: 500;
+}
