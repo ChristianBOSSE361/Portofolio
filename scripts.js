@@ -19,3 +19,17 @@ navLiens.querySelectorAll('a').forEach(lien => {
     navLiens.classList.remove('ouvert');
   });
 });
+
+const cards = document.querySelectorAll(".planet-card");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+cards.forEach(card => observer.observe(card));
