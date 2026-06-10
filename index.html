@@ -22,6 +22,27 @@
 <!-- LIEN CDN : icônes des technos -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
+<!-- Nav BAR -->
+<nav class="navbar" id="navbar">
+<div class="nav-container">
+<!-- Logo / Prénom -->
+<a href="#" class="nav-logo">Christian</a>
+<!-- Liens de navigation -->
+<ul class="nav-liens">
+<li><a href="#a-propos">À propos</a></li>
+<li><a href="#competences">Compétences</a></li>
+<li><a href="#experiences">Expériences</a></li>
+<li><a href="#projets">Projets</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<!-- Bouton menu hamburger (mobile) -->
+<button class="nav-hamburger" id="hamburger" aria-label="Menu">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</nav>
 </head>
 
 
@@ -79,6 +100,23 @@ Student at Grenoble INP - Ensimag | Double Degree: MMIS (Final year) & Master's 
 
       <p> ajouter une animation suyr le coté de quelqu'un  qui est en train de reflachir en regardant les étoile dans la nuit</p>
     </div>
+
+    <!-- <div class="about-image">
+
+    <img src="assets/fantasy-astral-wallpaper-composition.jpg" alt="animation espace">
+
+    <div class="stars-overlay">
+
+        <span class="star s1"></span>
+        <span class="star s2"></span>
+        <span class="star s3"></span>
+        <span class="star s4"></span>
+        <span class="star s5"></span>
+
+    </div>
+
+</div>
+       -->
 
     <div class="about-card">
       <h3>Quick Info</h3>
@@ -163,14 +201,90 @@ données de capteurs industriels avec Scikit-learn.
 </div><!-- fin .timeline -->
 </div>
 </section>
-<!-- ============ PROJECT SECTION ============== -->
-<section id ="projects" class="projects" >
 
-<div class="container" >
-<h2 class="section-titre">Projects</h2>  
+<!-- ============ PROJECT SECTION ============== -->
+
+<section id="projets" class="projets">
+<div class="container">
+<h2 class="section-titre">Projets</h2>
+<div class="projets-grille">
+<!-- PROJET PRINCIPAL (grande carte) -->
+<div class="projet-carte projet-featured">
+<div class="projet-top">
+<span class="projet-badge">⭐ Projet phare</span>
+<div class="projet-liens">
+<a href="https://github.com/tonpseudo/projet1"
+target="_blank" class="lien-icone" title="Voir sur GitHub">
+
+<!-- Icône GitHub SVG -->
+<svg viewBox="0 0 24 24" width="20" fill="currentColor">
+<path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+</svg>
+</a>
+<a href="#" target="_blank" class="lien-icone" title="Voir la démo">
+<svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+</svg>
+</a>
+</div>
+</div>
+<h3 class="projet-titre">Détecteur d'émotions en temps réel</h3>
+<p class="projet-desc">
+Modèle CNN entraîné sur FER-2013 pour classifier 7 émotions
+depuis un flux webcam. Précision de 68% sur le jeu de test.
+</p>
+<div class="projet-tags">
+<span class="projet-tag">PyTorch</span>
+<span class="projet-tag">OpenCV</span>
+<span class="projet-tag">Python</span>
+</div>
 </div>
 
+<!-- PROJET NORMAL -->
+<div class="projet-carte">
+<div class="projet-top">
+<span class="projet-badge badge-data">Data</span>
+<div class="projet-liens">
+<a href="https://github.com/tonpseudo/projet2" target="_blank" class="lien-icone">
+<svg viewBox="0 0 24 24" width="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+</a>
+</div>
+</div>
+<h3 class="projet-titre">Prédiction de churn clients</h3>
+<p class="projet-desc">
+Pipeline complet : EDA, feature engineering, entraînement
+XGBoost/Random Forest, et API de prédiction avec FastAPI.
+</p>
+<div class="projet-tags">
+<span class="projet-tag">Scikit-learn</span>
+<span class="projet-tag">FastAPI</span>
+<span class="projet-tag">Pandas</span>
+</div>
+</div>
 
+<!-- PROJET NORMAL  -->
+<div class="projet-carte">
+<div class="projet-top">
+<span class="projet-badge badge-ml">ML</span>
+<div class="projet-liens">
+<a href="https://github.com/tonpseudo/projet3" target="_blank" class="lien-icone">
+<svg viewBox="0 0 24 24" width="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+</a>
+</div>
+</div>
+<h3 class="projet-titre">RAG sur documents PDF</h3>
+<p class="projet-desc">
+Système de questions-réponses sur corpus de documents
+via embeddings + FAISS + LLM via l'API Claude.
+</p>
+<div class="projet-tags">
+<span class="projet-tag">LangChain</span>
+<span class="projet-tag">FAISS</span>
+<span class="projet-tag">Python</span>
+</div>
+</div>
+</div><!-- fin .projets-grille -->
+</div>
 </section>
 
 <!-- ========== COMPETENCE SECTION ========== -->

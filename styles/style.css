@@ -1,3 +1,105 @@
+/* === NAV BAR === */
+.navbar {
+  position:   fixed;        /* reste collée en haut même en scrollant */
+  top:         0;
+  left:        0;
+  right:       0;
+  z-index:     1000;        /* par-dessus tout le reste */
+  background:  transparent; /* transparente au départ */
+  transition:  background 0.4s ease, box-shadow 0.4s ease;
+  padding:     0 32px;
+}
+/* Quand JS ajoute .scrolled : fond blanc + ombre */
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);  /* effet verre dépoli */
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+.nav-container {
+  max-width:       900px;
+  margin:          0 auto;
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  height:          70px;
+}
+.nav-logo {
+  font-size:      1.4rem;
+  font-weight:    800;
+  color:          #ffffff;
+  text-decoration: none;
+  letter-spacing:  1px;
+}
+/* Logo devient sombre une fois la navbar colorée */
+.navbar.scrolled .nav-logo {
+  color: var(--couleur-texte);
+}
+.nav-liens {
+  list-style: none;   /* supprime les puces */
+  display:    flex;
+  gap:        36px;
+}
+.nav-liens a {
+  color:           rgba(255,255,255,0.85);
+  text-decoration:  none;
+  font-size:        0.9rem;
+  font-weight:      500;
+  position:         relative;
+  padding-bottom:   4px;
+  transition:       color 0.2s ease;
+}
+/* Soulignement animé au hover */
+.nav-liens a::after {
+  content:    "";
+  position:   absolute;
+  bottom:     0;
+  left:       0;
+  width:      0;                   /* commence invisible */
+  height:     2px;
+  background: var(--couleur-principale);
+  transition: width 0.3s ease;
+}
+.nav-liens a:hover::after {
+  width: 100%;                   /* s'étend jusqu'au bout */
+}
+.navbar.scrolled .nav-liens a {
+  color: #444;                   /* sombre sur fond blanc */
+}
+/* Hamburger : 3 barres */
+.nav-hamburger {
+  display:         none;   /* caché sur desktop */
+  flex-direction:  column;
+  gap:             5px;
+  background:     none;
+  border:          none;
+  cursor:          pointer;
+  padding:         4px;
+}
+.nav-hamburger span {
+  display:     block;
+  width:       24px;
+  height:      2px;
+  background:  #ffffff;
+  transition:  all 0.3s ease;
+}
+/* Sur mobile : affiche le hamburger, cache les liens */
+@media (max-width: 640px) {
+  .nav-hamburger { display: flex; }
+  .nav-liens {
+    display:        none;
+    position:       absolute;
+    top:            70px;
+    left:           0;
+    right:          0;
+    flex-direction: column;
+    background:     rgba(255,255,255,0.97);
+    padding:        20px 32px;
+    gap:            20px;
+    box-shadow:     0 8px 24px rgba(0,0,0,0.1);
+  }
+  .nav-liens.ouvert { display: flex; }  /* JS ajoute .ouvert */
+  .nav-liens a { color: #444; }
+}
 
 /* === VARIABLES GLOBALES === */
 :root {
@@ -63,6 +165,144 @@ body {
   max-width:  500px;
   margin:     0 auto 32px;
   line-height: 1.6;
+}
+
+.about-image img{
+    width:100%;
+    display:block;
+
+    animation: spaceBreath 12s ease-in-out infinite;
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes spaceBreath{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+.about-image{
+    position:relative;
+}
+
+.stars-overlay{
+    position:absolute;
+    inset:0;
+}
+
+.star{
+
+    position:absolute;
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px white;
+
+    animation:twinkle 3s infinite;
+}
+.star{
+
+    position:absolute;
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 20px white;
+
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+
+    0%{
+        opacity:0.2;
+        transform:scale(0.8);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.4);
+    }
+
+    100%{
+        opacity:0.2;
+        transform:scale(0.8);
+    }
+}
+
+@keyframes constellationGlow{
+
+    0%{
+        opacity:0.3;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0.3;
+    }
+}
+
+.about-image:hover img{
+    transform:scale(1.08);
+}
+.about-image img{
+    transition:1s ease;
+}
+
+.about-image{
+
+    opacity:0;
+
+    transform:
+        translateY(50px);
+
+    animation:
+        reveal 1.5s forwards;
+}
+
+@keyframes reveal{
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
 }
 
 
@@ -204,6 +444,7 @@ body {
   flex-direction: column;
   text-align: center;
 }
+
 
 /* === EXPERIENCE SECTION === */
 .experiences {

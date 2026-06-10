@@ -1,0 +1,13 @@
+# CONTENT OF THE Portfolio
+
+
+## HEAD (ne s'affiche généralement pas dans le portofolio)
+## The Story behind or Meet Christian
+## FORMATION : The Foundatin of my Journey
+## EXPERIENCES or My Journey So far
+## PROJECTS or What I've Built
+## COMPETENCES or Skills and Craft
+## HOBBIES AND INTERESTS : OutSide the Work
+## CONTACTS:  Let's Connect !!!
+
+## FOOTER
