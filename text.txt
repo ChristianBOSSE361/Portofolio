@@ -11,3 +11,16 @@
 ## CONTACTS:  Let's Connect !!!
 
 ## FOOTER
+
+
+Things to do after:
+* Generally :
+- essayer d'uniformiser les differentes couleurs de la page plus tyard :
+- essayer de gerer les differentes tailles pour que cela soit fait de maniere automatiques :
+
+
+* Concernant la partie formation :
+
+- add the fact that we could click and go to the different scholl and formation information
+- add also the picture of the scholl sur la gauche pour que ce soit plus propre 
+-
