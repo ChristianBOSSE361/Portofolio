@@ -20,16 +20,41 @@ navLiens.querySelectorAll('a').forEach(lien => {
   });
 });
 
-const cards = document.querySelectorAll(".planet-card");
+// const cards = document.querySelectorAll(".planet-card");
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, {
-  threshold: 0.2
-});
+// const observer = new IntersectionObserver((entries) => {
+//   entries.forEach(entry => {
+//     if (entry.isIntersecting) {
+//       entry.target.classList.add("visible");
+//     }
+//   });
+// }, {
+//   threshold: 0.2
+// });
 
-cards.forEach(card => observer.observe(card));
+// cards.forEach(card => observer.observe(card));
+
+// Génération des étoiles pour la section Formation
+const conteneurEtoiles = document.getElementById('etoiles');
+if (conteneurEtoiles) {  // sécurité : on vérifie que l'élément existe
+  for (let i = 0; i < 90; i++) {
+    const etoile = document.createElement('div');
+    etoile.classList.add('etoile');
+    // Taille aléatoire entre 0.5 et 2.5px
+    const taille = Math.random() * 2 + 0.5;
+    // Durée d'animation aléatoire entre 1.5s et 4.5s
+    const duree  = (Math.random() * 3 + 1.5).toFixed(1);
+    // Délai aléatoire pour que les étoiles ne scintillent pas toutes en même temps
+    const delai  = (Math.random() * 4).toFixed(1);
+    etoile.style.cssText = `
+      width:            ${taille}px;
+      height:           ${taille}px;
+      top:              ${Math.random() * 100}%;
+      left:             ${Math.random() * 100}%;
+      --d:              ${duree}s;
+      animation-delay:  ${delai}s;
+      opacity:          ${(Math.random() * 0.5 + 0.2).toFixed(2)};
+    `;
+    conteneurEtoiles.appendChild(etoile);
+  }
+}
