@@ -110,6 +110,10 @@
   --font-title: 'Space Grotesk', sans-serif;
 }
 
+.sections-wrapper {
+  background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%);
+}
+
 
 /* === RESET DE BASE === */
 * {
@@ -448,22 +452,62 @@ body {
 
 /* === FORMATION SECTION === */
 .formation {
-  padding:    3vw 0;
-  background: radial-gradient(ellipse at 30% 40%, #0d1b4b 0%, #050510 60%, #000008 100%);
+  padding:    4rem 0.5rem;
+  /* background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%); */
   position:   relative;   /* contexte pour les enfants absolute */
   overflow:   hidden;     /* coupe les nébuleuses qui débordent */
 }
 /* Le titre devient blanc sur fond sombre */
-.formation-titre {
+/* .formation-titre {
   color: #ffffff;
   font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+} */
+.section-titre {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  color: #ffffff;
+  font-size: 3rem;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
-.formation-sous-titre {
+
+.section-titre .line {
+  flex: 1;
+  height: 1px;
+  max-width: 30vw;
+  /* background: rgba(255,255,255,0.3); */
+}
+/* .section-titre {
+  border: 2px solid red;
+}
+
+.section-titre .line {
+  border: 2px solid blue;
+} */
+
+.section-titre.dark .line{
+    background: rgba(255,255,255,0.3);
+}
+
+.section-titre.light .line{
+
+    background: rgba(0,0,0,0.2);
+}
+.section-sous-titre {
   color:          rgba(255,255,255,0.35);
-  font-size:      0.8rem;
+  font-size:      1rem;
   letter-spacing: 3px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin-bottom:  48px;
+  text-align: center;
 }
 /* Conteneur des étoiles (rempli par JS) */
 .formation-etoiles {
@@ -519,7 +563,7 @@ body {
 }
 /* Carte de base — effet verre (glassmorphisme) */
 .formation-carte {
-  background:      rgba(255,255,255,0.05);
+  background:      rgba(255, 255, 255, 0.171);
   border:          1px solid rgba(255,255,255,0.10);
   border-radius:   20px;
   padding:         28px;
@@ -527,6 +571,10 @@ body {
   position:        relative;
   overflow:        hidden;
   transition:      transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
 }
 /* Halo coloré en coin de chaque carte */
 .formation-carte::before {
@@ -538,17 +586,23 @@ body {
   filter:    blur(40px);
   opacity:   0.35;
   transition: opacity 0.3s ease;
+
 }
 .formation-carte:hover {
   transform:    translateY(-10px) scale(1.02);
-  border-color: rgba(255,255,255,0.25);
+  border-color: rgba(235, 220, 10, 0.918);
   box-shadow:   0 24px 60px rgba(0,0,0,0.4);
 }
 .formation-carte:hover::before { opacity: 0.65; }
+
+.formation-content {
+  flex : 1;
+}
 /* Couleurs des halos par variante */
 .fc-violet::before { background: #6C63FF; }
 .fc-teal::before   { background: #14b8a6; }
 .fc-orange::before { background: #f97316; }
+.fc-rouge::before  { background: #cc556f; }
 /* Ligne date + point pulsant */
 .fc-annee {
   display:      flex;
@@ -564,6 +618,8 @@ body {
 .fc-violet .fc-annee { color: #a78bfa; }
 .fc-teal   .fc-annee { color: #5eead4; }
 .fc-orange .fc-annee { color: #fb923c; }
+.fc-rouge  .fc-annee { color: #cf173f; }
+
 /* Point pulsant */
 .fc-point {
   width:         8px;
@@ -575,11 +631,13 @@ body {
 .fc-violet .fc-point { background: #a78bfa; }
 .fc-teal   .fc-point { background: #5eead4; }
 .fc-orange .fc-point { background: #fb923c; }
+.fc-rouge  .fc-point { background: #cf173f; }
+
 @keyframes pulser {
   0%, 100% { box-shadow: 0 0 0 0   rgba(167,139,250, 0.6); }
   50%      { box-shadow: 0 0 0 6px rgba(167,139,250, 0);   }
 }
-.fc-ecole {
+.fc-diplome {
   font-size:   1.1rem;
   font-weight: 700;
   color:       #ffffff;
@@ -587,7 +645,7 @@ body {
   position:    relative;
   z-index:     1;
 }
-.fc-diplome {
+.fc-ecole {
   font-size:     0.83rem;
   color:         rgba(255,255,255,0.55);
   margin-bottom: 18px;
@@ -624,113 +682,245 @@ body {
   border:        1px solid rgba(255,255,255,0.10);
 }
 
+.logo-school {
+    width: 180px;      /* ajuste selon tes goûts */
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 /* === EXPERIENCE SECTION === */
+
 .experiences {
-  padding:    100px 0;
-  /* background: #ffffff; */
+  padding:    4rem 4rem;
+  /* background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%); */
 }
-/* Chaque ligne de la timeline */
-.timeline-item {
-  display:  flex;
-  gap:      28px;
-  min-height: 160px;
+/* Colonne unique — chaque item empilé verticalement */
+.exp-timeline {
+  display:        flex;
+  flex-direction: column;
+  gap:            0;  /* pas de gap : le trait assure l'espacement */
 }
-/* Colonne gauche : logo + ligne verticale */
-.timeline-gauche {
+/* Un item = marqueur (barre) + carte */
+.exp-item {
+  display:     flex;
+  gap:         24px;
+  align-items: flex-start;
+}
+/* Colonne gauche : point + trait vertical */
+.exp-marqueur {
   display:        flex;
   flex-direction: column;
   align-items:    center;
-  flex-shrink:    0;     /* ne rétrécit jamais */
+  flex-shrink:    0;
+  padding-top:    22px;  /* aligne le point avec le titre de la carte */
 }
-/* Le carré contenant le logo */
-.logo-entreprise {
-  width:         60px;
-  height:        60px;
-  border-radius: 12px;
-  border:        2px solid #e8e8f0;
-  background:    #fff;
-  display:       flex;
-  align-items:   center;
-  justify-content: center;
-  padding:       8px;
+/* Le rond sur la barre */
+.exp-point {
+  width:         14px;
+  height:        14px;
+  border-radius: 50%;
+  background:    var(--couleur-principale);
+  border:        3px solid #ffffff;
+  box-shadow:    0 0 0 2px var(--couleur-principale);
   flex-shrink:   0;
+  transition:    transform 0.3s ease;
 }
-.logo-entreprise img {
-  width:      100%;
-  height:     100%;
-  object-fit: contain;  /* garde les proportions du logo */
+.exp-item:hover .exp-point {
+  transform: scale(1.35);
 }
-/* La ligne verticale entre deux logos */
-.timeline-ligne {
+/* Le trait qui descend sous le point */
+.exp-trait {
   width:      2px;
-  flex:       1;          /* s'étire pour remplir l'espace restant */
-  background: linear-gradient(to bottom, #6C63FF, #e8e8f0);
-  margin-top: 8px;
+  flex:       1;          /* s'étire sur toute la hauteur restante */
+  background: linear-gradient(to bottom, #6C63FF 0%, #e8e8f0 100%);
+  margin-top: 6px;
   border-radius: 2px;
 }
-/* Masquer la ligne du dernier item */
-.timeline-item:last-child .timeline-ligne {
+/* Masque le trait du dernier item */
+.exp-item:last-child .exp-trait {
   display: none;
 }
-/* Colonne droite : contenu */
-.timeline-contenu {
-  padding-bottom: 40px;
-  flex:           1;  /* prend tout l'espace horizontal restant */
+/* La carte : logo à gauche + contenu à droite */
+.exp-card {
+  display:        flex;
+  gap:            20px;
+  align-items:    flex-start;
+
+  background:     rgba(255,255,255,0.05);
+  border:         1px solid rgba(255,255,255,0.10);
+
+  border-radius:  16px;
+  padding:        24px;
+  flex:           1;
+  margin-bottom:  24px;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:     0 8px 24px rgba(0,0,0,0.25);
+
+  transition:     transform 0.3s ease,
+                  box-shadow 0.3s ease,
+                  border-color 0.3s ease;
 }
-/* Header : poste à gauche, date à droite */
+
+.exp-item:hover .exp-card {
+  transform:    translateY(-10px) scale(1.02);
+  border-color: rgba(235, 220, 10, 0.918);
+  box-shadow:   0 24px 60px rgba(0,0,0,0.4);
+}
+/* Logo de l'entreprise */
+.exp-logo {
+  width:           56px;
+  height:          56px;
+  border-radius:   12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  padding:         8px;
+  flex-shrink:     0;
+}
+.exp-logo img {
+  width:      100%;
+  height:     100%;
+  object-fit: contain;
+}
+/* Contenu texte */
+.exp-contenu { flex: 1; }
 .exp-header {
   display:         flex;
   justify-content: space-between;
   align-items:     flex-start;
-  margin-bottom:   12px;
   gap:             12px;
+  margin-bottom:   4px;
 }
 .exp-poste {
-  font-size:   1.1rem;
-  font-weight: 700;
-  color:       var(--couleur-texte);
+  color: #ffffff;
 }
-.exp-entreprise {
-  font-size:   0.9rem;
-  color:       var(--couleur-principale);
-  font-weight: 500;
-  margin-top:  2px;
-}
+
 .exp-date {
-  font-size:    0.8rem;
-  color:        #888;
-  background:   var(--couleur-fond);
-  padding:      4px 10px;
-  border-radius: 99px;
-  white-space:  nowrap;   /* ne se coupe pas en 2 lignes */
-  flex-shrink:  0;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.06);
 }
-.exp-description {
-  color:         #555;
-  font-size:     0.95rem;
-  line-height:   1.7;
-  margin-bottom: 14px;
+
+.exp-entreprise {
+  color: #a78bfa;
 }
-/* Badges de compétences */
-.exp-tags {
-  display:   flex;
-  flex-wrap: wrap;
-  gap:       8px;
+
+.exp-desc {
+  color: rgba(255,255,255,0.65);
 }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .exp-tag {
-  background:    rgba(108,99,255,0.08);
-  color:         var(--couleur-principale);
+  background: rgba(108,99,255,0.12);
+  color: #c4b5fd;
+  border: 1px solid rgba(108,99,255,0.25);
   font-size:     0.75rem;
   font-weight:   600;
   padding:       4px 12px;
   border-radius: 99px;
 }
 
+/* === SECTION PROJETS (thème galaxie, cartes image) === */
+.projets {
+  padding:    4rem 4rem;
+  /* background: radial-gradient(ellipse at 70% 30%, #0a1628 0%, #050510 55%, #000008 100%); */
+  position:   relative;
+  overflow:   hidden;
+}
+.projets .container {
+  position: relative;
+  z-index:   1;
+}
+/* Grille auto — 3 cols sur desktop, 2 sur tablette, 1 sur mobile */
+.projets-galaxy-grille {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap:                   24px;
+}
+/* La carte (c'est un <a> donc on annule le style de lien) */
+.projet-card {
+  text-decoration: none;             /* annule le soulignement du <a> */
+  color:           inherit;          /* hérite de la couleur parente */
+  display:         flex;
+  flex-direction:  column;
+  background:      rgba(255,255,255,0.04);
+  border:          1px solid rgba(255,255,255,0.09);
+  border-radius:   16px;
+  overflow:        hidden;           /* l'image ne déborde pas du border-radius */
+  backdrop-filter: blur(10px);
+  transition:      transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.projet-card:hover {
+  transform:    translateY(-10px) scale(1.02);
+  border-color: rgba(235, 220, 10, 0.918);
+  box-shadow:   0 24px 60px rgba(0,0,0,0.4);
+}
+/* Zone image : hauteur fixe, image en cover */
+.projet-image {
+  width:    100%;
+  height:   160px;
+  background: rgba(108,99,255,0.1);  /* fond si pas d'image */
+  display:  flex;
+  align-items:     center;
+  justify-content: center;
+  overflow:        hidden;
+  position:        relative;
+}
+.projet-image img {
+  width:      100%;
+  height:     100%;
+  object-fit: cover;  /* remplit le cadre en recadrant si besoin */
+  transition:  transform 0.4s ease;
+}
+/* Zoom léger sur l'image au survol */
+.projet-card:hover .projet-image img {
+  transform: scale(1.07);
+}
+/* Placeholder si l'image est absente (classe no-img ajoutée par onerror) */
+.projet-image.no-img::after {
+  content:   "🖼️";
+  font-size: 2.5rem;
+  opacity:   0.3;
+}
+/* Zone texte sous l'image */
+.projet-info {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap:     8px;
+}
+.projet-tags {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       6px;
+}
+.projet-tags span {
+  font-size:     0.65rem;
+  font-weight:   700;
+  padding:       3px 8px;
+  border-radius: 99px;
+  background:    rgba(108,99,255,0.2);
+  color:         #a78bfa;
+  letter-spacing: 0.5px;
+}
+.projet-nom {
+  font-size:   1rem;
+  font-weight: 700;
+  color:       #ffffff;
+}
+.projet-phrase {
+  font-size:   0.8rem;
+  color:       rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
 
 /* === COMPETENCE SECTION === */
 .competences {
-  padding:    100px 0;
-  background: var(--couleur-fond);
+  padding:    4rem 4rem;
+  /* background: var(--couleur-fond); */
 }
 /* 3 equals column for the 3 parts */
 .comp-grille {
@@ -791,4 +981,160 @@ body {
   font-size:   0.75rem;
   color:       #666;
   font-weight: 500;
+}
+
+/* === SECTION HOBBIES === */
+.hobbies {
+  padding:    4rem 4rem;
+  /* background: #f8f8ff; */
+}
+/* Grille auto : 3 cols sur desktop, 2 sur tablette, 1 sur mobile */
+.hobbies-grille {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap:                   20px;
+}
+.hobby-card {
+  background:     #ffffff;
+  border:         1px solid #eeeef5;
+  border-radius:  16px;
+  padding:        28px 20px;
+  text-align:     center;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            12px;
+  box-shadow:     0 2px 12px rgba(0,0,0,0.05);
+  transition:     transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor:         default;
+}
+.hobby-card:hover {
+  transform:    translateY(-8px);
+  box-shadow:   0 16px 40px rgba(108,99,255,0.12);
+  border-color: rgba(108,99,255,0.3);
+}
+/* L'emoji s'agrandit dans un cercle au hover */
+.hobby-emoji {
+  font-size:     2.4rem;
+  width:         68px;
+  height:        68px;
+  border-radius: 50%;
+  background:    rgba(108,99,255,0.07);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  transition:    transform 0.3s ease, background 0.3s ease;
+  flex-shrink:   0;
+}
+.hobby-card:hover .hobby-emoji {
+  transform:  scale(1.15) rotate(-6deg);
+  background: rgba(108,99,255,0.14);
+}
+.hobby-nom {
+  font-size:   1rem;
+  font-weight: 700;
+  color:       var(--couleur-texte);
+}
+.hobby-desc {
+  font-size:   0.82rem;
+  color:       #888;
+  line-height: 1.5;
+}
+
+
+
+/* ======= CONTACT SECTION ====== */
+.contact {
+  padding:    120px 0 100px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  text-align: center;
+}
+.contact-accroche {
+  max-width:     560px;
+  margin:        0 auto 48px;
+}
+/* "Disponible dès..." — petit label au-dessus */
+.contact-label {
+  display:        inline-block;
+  background:    rgba(108,99,255,0.2);
+  color:         #a78bfa;
+  font-size:     0.78rem;
+  font-weight:   600;
+  letter-spacing: 1px;
+  padding:       5px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+  border:        1px solid rgba(108,99,255,0.35);
+}
+.contact-titre {
+  font-size:     2.8rem;
+  font-weight:   800;
+  color:         #ffffff;
+  margin-bottom: 16px;
+  line-height:   1.2;
+}
+.contact-desc {
+  color:       rgba(255,255,255,0.55);
+  font-size:   1rem;
+  line-height: 1.7;
+}
+/* Bouton email principal */
+.contact-btn {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             10px;
+  background:      var(--couleur-principale);
+  color:           #ffffff;
+  text-decoration: none;
+  font-size:       1rem;
+  font-weight:     600;
+  padding:         16px 36px;
+  border-radius:   12px;
+  margin-bottom:   48px;
+  transition:      transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow:      0 4px 24px rgba(108,99,255,0.35);
+}
+.contact-btn:hover {
+  transform:  translateY(-3px);
+  box-shadow: 0 12px 40px rgba(108,99,255,0.5);
+}
+/* Ligne de liens secondaires */
+.contact-liens {
+  display:         flex;
+  justify-content: center;
+  gap:             16px;
+  flex-wrap:       wrap;
+}
+.contact-lien {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             8px;
+  color:           rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size:       0.9rem;
+  font-weight:     500;
+  padding:         12px 24px;
+  border-radius:   10px;
+  border:          1px solid rgba(255,255,255,0.12);
+  background:      rgba(255,255,255,0.04);
+  transition:      color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.contact-lien:hover {
+  color:        #ffffff;
+  background:   rgba(108,99,255,0.2);
+  border-color: rgba(108,99,255,0.45);
+  transform:    translateY(-2px);
+}
+/* Footer */
+.footer {
+  background:  #050510;
+  color:       rgba(255,255,255,0.25);
+  text-align:  center;
+  font-size:   0.8rem;
+  padding:     20px;
+}
+/* Correctif scroll-padding pour la navbar fixe */
+html {
+  scroll-behavior:    smooth;  /* défilement doux entre sections */
+  scroll-padding-top: 80px;   /* évite que la navbar masque le titre */
 }

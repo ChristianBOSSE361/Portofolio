@@ -3,7 +3,7 @@
 
 ## HEAD (ne s'affiche généralement pas dans le portofolio)
 ## The Story behind or Meet Christian
-## FORMATION : The Foundatin of my Journey
+## FORMATION : The Foundation of my Journey
 ## EXPERIENCES or My Journey So far
 ## PROJECTS or What I've Built
 ## COMPETENCES or Skills and Craft
@@ -24,3 +24,5 @@ Things to do after:
 - add the fact that we could click and go to the different scholl and formation information
 - add also the picture of the scholl sur la gauche pour que ce soit plus propre 
 -
+
+Nouvelle couleur: background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%);
