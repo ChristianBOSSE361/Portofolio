@@ -638,7 +638,7 @@ body {
   50%      { box-shadow: 0 0 0 6px rgba(167,139,250, 0);   }
 }
 .fc-diplome {
-  font-size:   1.1rem;
+  font-size:   1.5rem;
   font-weight: 700;
   color:       #ffffff;
   margin-bottom: 6px;
@@ -716,16 +716,6 @@ body {
   padding-top:    22px;  /* aligne le point avec le titre de la carte */
 }
 /* Le rond sur la barre */
-.exp-point {
-  width:         14px;
-  height:        14px;
-  border-radius: 50%;
-  background:    var(--couleur-principale);
-  border:        3px solid #ffffff;
-  box-shadow:    0 0 0 2px var(--couleur-principale);
-  flex-shrink:   0;
-  transition:    transform 0.3s ease;
-}
 .exp-item:hover .exp-point {
   transform: scale(1.35);
 }
@@ -771,8 +761,8 @@ body {
 }
 /* Logo de l'entreprise */
 .exp-logo {
-  width: 64px;
-  height: 64px;
+  width: 150px;
+  height: 150px;
 
   display: flex;
   align-items: center;
@@ -802,28 +792,34 @@ body {
 }
 .exp-poste {
   color: #ffffff;
+  height: 2rem;
+  font-size: 1.5rem;
 }
 
 .exp-date {
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.829);
   background: rgba(255,255,255,0.06);
 }
 
 .exp-entreprise {
-  color: #a78bfa;
+  color:         rgba(255,255,255,0.55);
+  height: 2rem;
+  font-size: 1rem;
 }
 
 .exp-desc {
   color: rgba(255,255,255,0.65);
+  font-size: 0.9rem;
+
 }
-.exp-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem;}
 .exp-tag {
   background: rgba(108,99,255,0.12);
   color: #c4b5fd;
   border: 1px solid rgba(108,99,255,0.25);
   font-size:     0.75rem;
   font-weight:   600;
-  padding:       4px 12px;
+  padding:       5px 10px;
   border-radius: 99px;
 }
 
@@ -847,11 +843,11 @@ body {
 /* La carte (c'est un <a> donc on annule le style de lien) */
 .projet-card {
   text-decoration: none;             /* annule le soulignement du <a> */
-  color:           inherit;          /* hérite de la couleur parente */
+  /* color:           inherit;          hérite de la couleur parente */
   display:         flex;
   flex-direction:  column;
-  background:      rgba(255,255,255,0.04);
-  border:          1px solid rgba(255,255,255,0.09);
+  background:      #ffffff;
+  border:          1px solid #eeeef5;
   border-radius:   16px;
   overflow:        hidden;           /* l'image ne déborde pas du border-radius */
   backdrop-filter: blur(10px);
@@ -864,7 +860,6 @@ body {
 }
 /* Zone image : hauteur fixe, image en cover */
 .projet-image {
-  width:    100%;
   height:   160px;
   background: rgba(108,99,255,0.1);  /* fond si pas d'image */
   display:  flex;
@@ -874,9 +869,9 @@ body {
   position:        relative;
 }
 .projet-image img {
-  width:      100%;
-  height:     100%;
-  object-fit: cover;  /* remplit le cadre en recadrant si besoin */
+  width:      60%;
+  height:     60%;
+  object-fit: contain;  /* remplit le cadre en recadrant si besoin */
   transition:  transform 0.4s ease;
 }
 /* Zoom léger sur l'image au survol */
@@ -889,6 +884,14 @@ body {
   font-size: 2.5rem;
   opacity:   0.3;
 }
+
+.projet-image {
+  width: 100%;
+  height: 100%;      /* ajuste selon ton design */
+  object-fit: cover;  
+  border-radius: 12px;
+}
+
 /* Zone texte sous l'image */
 .projet-info {
   padding: 18px 20px 20px;
@@ -913,13 +916,14 @@ body {
 .projet-nom {
   font-size:   1rem;
   font-weight: 700;
-  color:       #ffffff;
+  color:       var(--couleur-texte);
 }
 .projet-phrase {
   font-size:   0.8rem;
-  color:       rgba(255,255,255,0.45);
+  color:       #888;
   line-height: 1.5;
 }
+
 
 /* === COMPETENCE SECTION === */
 .competences {
@@ -947,12 +951,13 @@ body {
   box-shadow: 0 16px 40px rgba(108,99,255,0.12);
 }
 .comp-titre {
-  font-size:     0.8rem;
+  font-size:     1rem;
   font-weight:   700;
   text-transform: uppercase;
   letter-spacing: 2px;
   color:         var(--couleur-principale);
   margin-bottom: 24px;
+  text-align: center;
 }
 
 /* Grille flexible pour les icônes : s'adapte au nombre */
@@ -978,13 +983,25 @@ body {
 }
 /* Icone itself (via Devicon) */
 .icone-item i {
-  font-size: 2.8rem;
+  font-size: 3rem;
 }
 /* Label under the icon */
 .icone-item span {
-  font-size:   0.75rem;
+  font-size:   1rem;
   color:       #666;
   font-weight: 500;
+}
+.icone-item img {
+  width:      3rem;
+  height:     3rem;
+  object-fit: contain;  /* remplit le cadre en recadrant si besoin */
+  transition:  transform 0.4s ease;
+}
+
+.custom-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
 }
 
 /* === SECTION HOBBIES === */
@@ -1019,7 +1036,7 @@ body {
 }
 /* L'emoji s'agrandit dans un cercle au hover */
 .hobby-emoji {
-  font-size:     2.4rem;
+  font-size:     2.5rem;
   width:         68px;
   height:        68px;
   border-radius: 50%;
@@ -1040,7 +1057,7 @@ body {
   color:       var(--couleur-texte);
 }
 .hobby-desc {
-  font-size:   0.82rem;
+  font-size:   0.9rem;
   color:       #888;
   line-height: 1.5;
 }
