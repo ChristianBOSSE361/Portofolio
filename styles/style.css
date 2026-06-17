@@ -11,7 +11,7 @@
 }
 /* Quand JS ajoute .scrolled : fond blanc + ombre */
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.171);
   backdrop-filter: blur(10px);  /* effet verre dépoli */
   box-shadow: 0 2px 20px rgba(0,0,0,0.08);
 }
@@ -453,20 +453,10 @@ body {
 /* === FORMATION SECTION === */
 .formation {
   padding:    4rem 0.5rem;
-  /* background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%); */
   position:   relative;   /* contexte pour les enfants absolute */
   overflow:   hidden;     /* coupe les nébuleuses qui débordent */
 }
-/* Le titre devient blanc sur fond sombre */
-/* .formation-titre {
-  color: #ffffff;
-  font-size: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-} */
+
 .section-titre {
   display: flex;
   align-items: center;
@@ -483,15 +473,7 @@ body {
   flex: 1;
   height: 1px;
   max-width: 30vw;
-  /* background: rgba(255,255,255,0.3); */
 }
-/* .section-titre {
-  border: 2px solid red;
-}
-
-.section-titre .line {
-  border: 2px solid blue;
-} */
 
 .section-titre.dark .line{
     background: rgba(255,255,255,0.3);
@@ -505,12 +487,11 @@ body {
   color:          rgba(255,255,255,0.35);
   font-size:      1rem;
   letter-spacing: 3px;
-  /* text-transform: uppercase; */
   margin-bottom:  48px;
   text-align: center;
 }
 /* Conteneur des étoiles (rempli par JS) */
-.formation-etoiles {
+.etoiles-bg {
   position: absolute;
   inset:    0;          /* raccourci pour top/right/bottom/left: 0 */
   pointer-events: none; /* les étoiles ne bloquent pas les clics */
@@ -537,13 +518,6 @@ body {
 .neb-2 { width: 280px; height: 200px; background: rgba(20,184,166,0.10);  bottom: 0;    right: -60px;  }
 .neb-3 { width: 220px; height: 180px; background: rgba(249,115,22,0.08);  top:  45%;  left:  45%;  }
 /* Grille des cartes */
-/* .formation-grille {
-  display:               grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap:                   24px;
-  position:              relative;
-  z-index:               1;   
-} */
 .formation-grille {
   display: grid;
   grid-template-columns: repeat(2, minmax(280px, 1fr));
@@ -694,6 +668,8 @@ body {
 .experiences {
   padding:    4rem 4rem;
   /* background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%); */
+  position:   relative;   /* contexte pour les enfants absolute */
+  overflow:   hidden;     /* coupe les nébuleuses qui débordent */
 }
 /* Colonne unique — chaque item empilé verticalement */
 .exp-timeline {
@@ -928,7 +904,8 @@ body {
 /* === COMPETENCE SECTION === */
 .competences {
   padding:    4rem 4rem;
-  /* background: var(--couleur-fond); */
+  position:   relative;   /* contexte pour les enfants absolute */
+  overflow:   hidden;     /* coupe les nébuleuses qui débordent */
 }
 /* 3 equals column for the 3 parts */
 .comp-grille {
@@ -1007,7 +984,8 @@ body {
 /* === SECTION HOBBIES === */
 .hobbies {
   padding:    4rem 4rem;
-  /* background: #f8f8ff; */
+  position:   relative;   /* contexte pour les enfants absolute */
+  overflow:   hidden;     /* coupe les nébuleuses qui débordent */
 }
 /* Grille auto : 3 cols sur desktop, 2 sur tablette, 1 sur mobile */
 .hobbies-grille {
