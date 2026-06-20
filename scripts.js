@@ -22,8 +22,10 @@ navLiens.querySelectorAll('a').forEach(lien => {
 
 
 // Génération des étoiles
+const nbEtoiles = window.innerWidth < 768 ? 300 : 1000;
+
 document.querySelectorAll(".etoiles-bg").forEach(container => {  // sécurité : on vérifie que l'élément existe
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < nbEtoiles; i++) {
     const etoile = document.createElement('div');
     etoile.classList.add('etoile');
     // Taille aléatoire entre 0.5 et 2.5px

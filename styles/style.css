@@ -505,7 +505,10 @@ body {
   background:   #ffffff;
   border-radius: 50%;
   animation:    scintiller var(--d, 3s) ease-in-out infinite alternate;
+  will-change: opacity;
+  transform: translateZ(0);   
 }
+
 @keyframes scintiller {
   from { opacity: 0.1; transform: scale(0.8); }
   to   { opacity: 0.9; transform: scale(1.2); }
