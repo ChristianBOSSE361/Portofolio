@@ -47,7 +47,7 @@ document.querySelectorAll(".etoiles-bg").forEach(container => {
     y:       Math.random() * canvas.height,
     taille:  Math.random() * 2 + 0.5,
     opacite: Math.random(),
-    delta:   Math.random() * 0.02 + 0.01  // scintillement plus doux
+    delta:   Math.random() * 0.01 + 0.01  // scintillement plus doux
   }));
 
   function animer() {
