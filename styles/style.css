@@ -670,7 +670,7 @@ body {
 /* === EXPERIENCE SECTION === */
 
 .experiences {
-  padding:    4rem 4rem;
+  padding:    4rem 2rem;
   /* background: radial-gradient(ellipse at 30% 40%,#2a3f8f 0%,#1a1f4f 50%,#0b0d1f 100%); */
   position:   relative;   /* contexte pour les enfants absolute */
   overflow:   hidden;     /* coupe les nébuleuses qui débordent */
@@ -686,6 +686,7 @@ body {
   display:     flex;
   gap:         1rem;
   align-items: flex-start;
+  flex-direction: row;
 }
 /* Colonne gauche : point + trait vertical */
 /*Ne sert plus trop a grande chose vu que le point été retirer, voir apres */
@@ -769,7 +770,7 @@ body {
   display:         flex;
   justify-content: space-between;
   align-items:     flex-start;
-  gap:             12px;
+  gap:             1rem;
   margin-bottom:   4px;
 }
 .exp-poste {
@@ -803,6 +804,17 @@ body {
   font-weight:   600;
   padding:       0.2rem 1rem;
   border-radius: 99px;
+}
+
+@media (max-width: 760px){
+  .exp-item { 
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .exp-logo {
+    max-width: 80px;
+  }
 }
 
 /* === SECTION PROJETS (thème galaxie, cartes image) === */
