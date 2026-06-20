@@ -8,6 +8,7 @@
   background:  transparent; /* transparente au départ */
   transition:  background 0.4s ease, box-shadow 0.4s ease;
   padding:     0 32px;
+  padding-bottom: 1rem;
 }
 /* Quand JS ajoute .scrolled : fond blanc + ombre */
 .navbar.scrolled {
@@ -141,7 +142,8 @@ body {
   justify-content: center;
   background:      linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
   text-align:      center;
-  padding:         40px;
+  padding:         5rem 2rem;
+
 }
 .hero-salut {
   color:          var(--couleur-principale);
@@ -396,12 +398,13 @@ body {
 
 /* ======= ABOUT SECTION ======= */
 .about {
-  padding: 100px 40px;
+  padding: 4rem 1rem;
   background: #ffffff;
 }
 
 .about-container {
   max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
 
   display: flex;
@@ -540,7 +543,7 @@ body {
   background:      rgba(255, 255, 255, 0.171);
   border:          1px solid rgba(255,255,255,0.10);
   border-radius:   20px;
-  padding:         28px;
+  padding:         2rem;
   backdrop-filter: blur(12px);  /* effet verre dépoli */
   position:        relative;
   overflow:        hidden;
@@ -649,7 +652,7 @@ body {
 .fc-tags span {
   font-size:     0.68rem;
   font-weight:   600;
-  padding:       3px 10px;
+  padding:       0.1rem 1rem;
   border-radius: 99px;
   background:    rgba(255,255,255,0.07);
   color:         rgba(255,255,255,0.55);
@@ -657,7 +660,8 @@ body {
 }
 
 .logo-school {
-    width: 180px;      /* ajuste selon tes goûts */
+    max-width: 180px;
+    width: 100%;
     height: auto;
     object-fit: contain;
     flex-shrink: 0;
@@ -680,10 +684,11 @@ body {
 /* Un item = marqueur (barre) + carte */
 .exp-item {
   display:     flex;
-  gap:         24px;
+  gap:         1rem;
   align-items: flex-start;
 }
 /* Colonne gauche : point + trait vertical */
+/*Ne sert plus trop a grande chose vu que le point été retirer, voir apres */
 .exp-marqueur {
   display:        flex;
   flex-direction: column;
@@ -710,14 +715,14 @@ body {
 /* La carte : logo à gauche + contenu à droite */
 .exp-card {
   display:        flex;
-  gap:            20px;
+  gap:            1rem;
   align-items:    flex-start;
 
   background:     rgba(255, 255, 255, 0.171);
   border:         1px solid rgba(255,255,255,0.10);
 
   border-radius:  16px;
-  padding:        24px;
+  padding:        2rem;
   flex:           1;
   margin-bottom:  24px;
 
@@ -737,8 +742,9 @@ body {
 }
 /* Logo de l'entreprise */
 .exp-logo {
-  width: 150px;
-  height: 150px;
+  max-width: 150px;
+  width: 100%;
+  aspect-ratio: 1 / 1; /*Pour faire en sorte que la hauteur soit égale a la largeur*/
 
   display: flex;
   align-items: center;
@@ -768,8 +774,8 @@ body {
 }
 .exp-poste {
   color: #ffffff;
-  height: 2rem;
-  font-size: 1.5rem;
+  line-height: 1.5;
+  font-size: 1.7rem;
 }
 
 .exp-date {
@@ -779,13 +785,13 @@ body {
 
 .exp-entreprise {
   color:         rgba(255,255,255,0.55);
-  height: 2rem;
-  font-size: 1rem;
+  line-height: 1.5;
+  font-size: 1.3rem;
 }
 
 .exp-desc {
   color: rgba(255,255,255,0.65);
-  font-size: 0.9rem;
+  font-size: 1rem;
 
 }
 .exp-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem;}
@@ -795,7 +801,7 @@ body {
   border: 1px solid rgba(108,99,255,0.25);
   font-size:     0.75rem;
   font-weight:   600;
-  padding:       5px 10px;
+  padding:       0.2rem 1rem;
   border-radius: 99px;
 }
 
@@ -836,7 +842,8 @@ body {
 }
 /* Zone image : hauteur fixe, image en cover */
 .projet-image {
-  height:   160px;
+  /* height:   160px; */
+  aspect-ratio: 1/1;
   background: rgba(108,99,255,0.1);  /* fond si pas d'image */
   display:  flex;
   align-items:     center;
@@ -914,18 +921,24 @@ body {
   gap:                   28px;
 }
 
+@media (max-width: 1024px) {
+  .comp-grille {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 /* The card of each part or category */
 .comp-bloc {
   background:    #ffffff;
   border-radius: 16px;
-  padding:       32px 28px;
+  padding:       2rem 1.5rem;
   box-shadow:    0 4px 24px rgba(0,0,0,0.06);
   border-top:    3px solid var(--couleur-principale);
   transition:    transform 0.3s ease, box-shadow 0.3s ease;
 }
 .comp-bloc:hover {
   transform:  translateY(-6px);
-  box-shadow: 0 16px 40px rgba(108,99,255,0.12);
+  box-shadow: 0 16px 40px rgba(22, 20, 73, 0.048);
 }
 .comp-titre {
   font-size:     1rem;
@@ -949,7 +962,7 @@ body {
   flex-direction: column;
   align-items:    center;
   gap:            8px;
-  padding:       12px;
+  padding:       1rem;
   border-radius:  10px;
   transition:     background 0.2s ease, transform 0.2s ease;
   cursor:         default;
@@ -976,8 +989,9 @@ body {
 }
 
 .custom-icon {
-    width: 48px;
-    height: 48px;
+    max-width: 48px;
+    width: 100%;
+    aspect-ratio: 1/1;
     object-fit: contain;
 }
 
