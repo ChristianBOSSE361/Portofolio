@@ -22,7 +22,7 @@ navLiens.querySelectorAll('a').forEach(lien => {
 
 
 // Génération des étoiles
-const nbEtoiles = window.innerWidth < 768 ? 300 : 1000;
+const nbEtoiles = window.innerWidth < 768 ? 100 : 500;
 
 document.querySelectorAll(".etoiles-bg").forEach(container => {  // sécurité : on vérifie que l'élément existe
   for (let i = 0; i < nbEtoiles; i++) {
