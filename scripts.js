@@ -22,27 +22,55 @@ navLiens.querySelectorAll('a').forEach(lien => {
 
 
 // Génération des étoiles
-const nbEtoiles = window.innerWidth < 768 ? 300 : 1000;
+document.querySelectorAll(".etoiles-bg").forEach(container => {
+  const canvas = document.createElement('canvas');
+  container.appendChild(canvas);
 
-document.querySelectorAll(".etoiles-bg").forEach(container => {  // sécurité : on vérifie que l'élément existe
-  for (let i = 0; i < nbEtoiles; i++) {
-    const etoile = document.createElement('div');
-    etoile.classList.add('etoile');
-    // Taille aléatoire entre 0.5 et 2.5px
-    const taille = Math.random() * 2 + 0.5;
-    // Durée d'animation aléatoire entre 1.5s et 4.5s
-    const duree  = (Math.random() * 3 + 1.5).toFixed(1);
-    // Délai aléatoire pour que les étoiles ne scintillent pas toutes en même temps
-    const delai  = (Math.random() * 4).toFixed(1);
-    etoile.style.cssText = `
-      width:            ${taille}px;
-      height:           ${taille}px;
-      top:              ${Math.random() * 100}%;
-      left:             ${Math.random() * 100}%;
-      --d:              ${duree}s;
-      animation-delay:  ${delai}s;
-      opacity:          ${(Math.random() * 0.5 + 0.2).toFixed(2)};
-    `;
-    container.appendChild(etoile);
+  canvas.style.cssText = `
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  `;
+
+  // Taille réelle en pixels du conteneur
+  canvas.width  = container.offsetWidth;
+  canvas.height = container.offsetHeight;
+
+  const ctx = canvas.getContext('2d');
+  const nbEtoiles = window.innerWidth < 768 ? 300 : 1000;
+
+  const etoiles = Array.from({ length: nbEtoiles }, () => ({
+    x:       Math.random() * canvas.width,
+    y:       Math.random() * canvas.height,
+    taille:  Math.random() * 2 + 0.5,
+    opacite: Math.random(),
+    delta:   Math.random() * 0.02 + 0.01  // scintillement plus doux
+  }));
+
+  function animer() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    etoiles.forEach(e => {
+      e.opacite += e.delta;
+      if (e.opacite >= 1 || e.opacite <= 0) e.delta *= -1;
+
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, e.taille, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${e.opacite.toFixed(2)})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(animer);
   }
+
+  animer();
+
+  // Si la fenêtre est redimensionnée, le canvas se remet à jour
+  window.addEventListener('resize', () => {
+    canvas.width  = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+  });
 });

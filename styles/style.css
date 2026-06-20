@@ -499,7 +499,7 @@ body {
   inset:    0;          /* raccourci pour top/right/bottom/left: 0 */
   pointer-events: none; /* les étoiles ne bloquent pas les clics */
 }
-/* Style d'une étoile individuelle */
+/* Style d'une étoile individuelle
 .etoile {
   position:     absolute;
   background:   #ffffff;
@@ -512,7 +512,7 @@ body {
 @keyframes scintiller {
   from { opacity: 0.1; transform: scale(0.8); }
   to   { opacity: 0.9; transform: scale(1.2); }
-}
+} */
 /* Halos nébuleuses */
 .nebuleuse {
   position:      absolute;
