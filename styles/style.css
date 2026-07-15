@@ -109,6 +109,10 @@
   --couleur-fond:       #f8f8ff;
   --font-main: 'Open Sans', sans-serif;
   --font-title: 'Space Grotesk', sans-serif;
+  --fc-green  : #079e2d;
+  --fc-teal   : #5eead4;
+  --fc-orange : #fb923c;
+  --fc-red    : #cf173f;
 }
 
 .sections-wrapper {
@@ -457,7 +461,7 @@ body {
 .formation {
   padding:    4rem 0.5rem;
   position:   relative;   /* contexte pour les enfants absolute */
-  overflow:   hidden;     /* coupe les nébuleuses qui débordent */
+  overflow:   visible;     /* coupe les nébuleuses qui débordent */
 }
 
 .section-titre {
@@ -496,24 +500,16 @@ body {
 /* Conteneur des étoiles (rempli par JS) */
 .etoiles-bg {
   position: absolute;
-  inset:    0;          /* raccourci pour top/right/bottom/left: 0 */
+  inset:    0;          
   pointer-events: none; /* les étoiles ne bloquent pas les clics */
 }
-/* Style d'une étoile individuelle
-.etoile {
-  position:     absolute;
-  background:   #ffffff;
-  border-radius: 50%;
-  animation:    scintiller var(--d, 3s) ease-in-out infinite alternate;
-  will-change: opacity;
-  transform: translateZ(0);   
-}
 
-@keyframes scintiller {
-  from { opacity: 0.1; transform: scale(0.8); }
-  to   { opacity: 0.9; transform: scale(1.2); }
-} */
 /* Halos nébuleuses */
+.nebuleuses-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 .nebuleuse {
   position:      absolute;
   border-radius: 50%;
@@ -541,23 +537,70 @@ body {
     grid-template-columns: 1fr;
   }
 }
-/* Carte de base — effet verre (glassmorphisme) */
+/* Carte de base — effet verre  */
+.scene {
+  perspective: 100rem;
+  width: 100%;
+}
 .formation-carte {
   background:      rgba(255, 255, 255, 0.171);
   border:          1px solid rgba(255,255,255,0.10);
   border-radius:   20px;
-  padding:         2rem;
-  backdrop-filter: blur(12px);  /* effet verre dépoli */
   position:        relative;
-  overflow:        hidden;
-  transition:      transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow:        visible;
+  /* transition:      transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; */
+  transition: transform 0.6s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  cursor : pointer;
+  height: 280px;
+  width: 100%;
+  will-change: transform;
 }
+
+/*Pour permettre de retourner les cartes au click*/
+.formation-carte.retournee {
+  transform: rotateY(180deg);
+}
+
+.carte-recto,
+.carte-verso {
+  position: absolute;
+  padding: 2rem;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+  /* backdrop-filter: blur(12px); */
+}
+
+.formation-carte.retournee .carte-recto {
+  opacity: 0;
+}
+.formation-carte.retournee .carte-verso {
+  opacity: 1;
+}
+
+.carte-verso {
+  transform: rotateY(180deg);
+}
+
+.carte-recto {
+  display: flex;
+  justify-content: inherit;
+  align-items: inherit;
+  gap: inherit;
+}
+
 /* Halo coloré en coin de chaque carte */
-.formation-carte::before {
+.formation-carte::before { display: none; }
+
+.carte-recto::before {
   content:   "";
   position:  absolute;
   top:       -50px; left: -50px;
@@ -568,21 +611,21 @@ body {
   transition: opacity 0.3s ease;
 
 }
-.formation-carte:hover {
+.formation-carte:not(.retournee):hover {
   transform:    translateY(-10px) scale(1.02);
   border-color: rgba(235, 220, 10, 0.918);
   box-shadow:   0 24px 60px rgba(0,0,0,0.4);
 }
-.formation-carte:hover::before { opacity: 0.65; }
+.formation-carte:not(.retournee):hover::before .carte-recto::before{ opacity: 0.65; }
 
 .formation-content {
-  flex : 1;
+  flex: 1;
 }
 /* Couleurs des halos par variante */
-.fc-violet::before { background: #6C63FF; }
-.fc-teal::before   { background: #14b8a6; }
-.fc-orange::before { background: #f97316; }
-.fc-rouge::before  { background: #cc556f; }
+.fc-violet .carte-recto::before{ background: var(--fc-green); }
+.fc-teal   .carte-recto::before{ background: var(--fc-teal); }
+.fc-orange .carte-recto::before{ background: var(--fc-orange); }
+.fc-rouge  .carte-recto::before{ background: var(--fc-red); }
 /* Ligne date + point pulsant */
 .fc-annee {
   display:      flex;
@@ -595,10 +638,10 @@ body {
   position:     relative;
   z-index:      1;
 }
-.fc-violet .fc-annee { color: #a78bfa; }
-.fc-teal   .fc-annee { color: #5eead4; }
-.fc-orange .fc-annee { color: #fb923c; }
-.fc-rouge  .fc-annee { color: #cf173f; }
+.fc-violet .fc-annee { color: var(--fc-green); }
+.fc-teal   .fc-annee { color: var(--fc-teal); }
+.fc-orange .fc-annee { color: var(--fc-orange); }
+.fc-rouge  .fc-annee { color: var(--fc-red); }
 
 /* Point pulsant */
 .fc-point {
@@ -608,10 +651,10 @@ body {
   flex-shrink:   0;
   animation:    pulser 2s ease-in-out infinite;
 }
-.fc-violet .fc-point { background: #a78bfa; }
-.fc-teal   .fc-point { background: #5eead4; }
-.fc-orange .fc-point { background: #fb923c; }
-.fc-rouge  .fc-point { background: #cf173f; }
+.fc-violet .fc-point { background: var(--fc-green); }
+.fc-teal   .fc-point { background: var(--fc-teal); }
+.fc-orange .fc-point { background: var(--fc-orange); }
+.fc-rouge  .fc-point { background: var(--fc-red); }
 
 @keyframes pulser {
   0%, 100% { box-shadow: 0 0 0 0   rgba(167,139,250, 0.6); }
@@ -627,7 +670,7 @@ body {
 }
 .fc-ecole {
   font-size:     0.83rem;
-  color:         rgba(255,255,255,0.55);
+  color:         rgba(255, 255, 255, 0.719);
   margin-bottom: 18px;
   line-height:   1.5;
   position:     relative;
@@ -643,7 +686,7 @@ body {
 }
 .fc-meta span {
   font-size: 0.78rem;
-  color:     rgba(255,255,255,0.38);
+  color:     rgba(255, 255, 255, 0.753);
 }
 .fc-tags {
   display:   flex;
@@ -653,14 +696,19 @@ body {
   z-index:   1;
 }
 .fc-tags span {
-  font-size:     0.68rem;
+  font-size:     0.8rem;
   font-weight:   600;
   padding:       0.1rem 1rem;
   border-radius: 99px;
-  background:    rgba(255,255,255,0.07);
-  color:         rgba(255,255,255,0.55);
+  background:    rgba(255, 255, 255, 0.11);
   border:        1px solid rgba(255,255,255,0.10);
 }
+
+.fc-violet .fc-tags span { color: var(--fc-green)}
+.fc-teal   .fc-tags span { color: var(--fc-teal);}
+.fc-orange .fc-tags span { color: var(--fc-orange);}
+.fc-rouge  .fc-tags span { color: var(--fc-red);}
+
 
 .logo-school {
     max-width: 180px;
@@ -692,26 +740,11 @@ body {
   flex-direction: row;
 }
 /* Colonne gauche : point + trait vertical */
-/*Ne sert plus trop a grande chose vu que le point été retirer, voir apres */
-.exp-marqueur {
-  display:        flex;
-  flex-direction: column;
-  align-items:    center;
-  flex-shrink:    0;
-  padding-top:    22px;  /* aligne le point avec le titre de la carte */
-}
 /* Le rond sur la barre */
 .exp-item:hover .exp-point {
   transform: scale(1.35);
 }
-/* Le trait qui descend sous le point */
-.exp-trait {
-  width:      2px;
-  flex:       1;          /* s'étire sur toute la hauteur restante */
-  background: linear-gradient(to bottom, #6C63FF 0%, #e8e8f0 100%);
-  margin-top: 6px;
-  border-radius: 2px;
-}
+
 /* Masque le trait du dernier item */
 .exp-item:last-child .exp-trait {
   display: none;
@@ -783,18 +816,19 @@ body {
 }
 
 .exp-date {
-  color: rgba(255, 255, 255, 0.829);
-  background: rgba(255,255,255,0.06);
+  color: rgb(241, 241, 241);
+  background: rgba(255, 255, 255, 0.212);
+  border-radius: 8px;
 }
 
 .exp-entreprise {
-  color:         rgba(255,255,255,0.55);
+  color:         rgba(255, 255, 255, 0.911);
   line-height: 1.5;
   font-size: 1.3rem;
 }
 
 .exp-desc {
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.747);
   font-size: 1rem;
 
 }

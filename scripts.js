@@ -40,14 +40,14 @@ document.querySelectorAll(".etoiles-bg").forEach(container => {
   canvas.height = container.offsetHeight;
 
   const ctx = canvas.getContext('2d');
-  const nbEtoiles = window.innerWidth < 768 ? 300 : 1000;
+  const nbEtoiles = window.innerWidth < 768 ? 300 : 800;
 
   const etoiles = Array.from({ length: nbEtoiles }, () => ({
     x:       Math.random() * canvas.width,
     y:       Math.random() * canvas.height,
     taille:  Math.random() * 1 + 0.5,
     opacite: Math.random(),
-    delta:   Math.random() * 0.01 + 0.03  // scintillement plus doux
+    delta:   Math.random() * 0.01 + 0.01  
   }));
 
   function animer() {
@@ -72,5 +72,12 @@ document.querySelectorAll(".etoiles-bg").forEach(container => {
   window.addEventListener('resize', () => {
     canvas.width  = container.offsetWidth;
     canvas.height = container.offsetHeight;
+  });
+});
+
+//ROtation des cartes au click
+document.querySelectorAll('.formation-carte').forEach(carte => {
+  carte.addEventListener('click' , () => {
+    carte.classList.toggle('retournee');
   });
 });
