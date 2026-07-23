@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 
-from langchain_community.document_loaders import PyPDFLoader, TextLoader
+from langchain_community.document_loaders import PyPDFLoader, TextLoader, DirectoryLoader
 
 # help(PyPDFLoader)
 
@@ -13,10 +13,7 @@ cv_loader = PyPDFLoader(CV)
 document = cv_loader.load()
 
 # Loading the different part of the portofolio
-portofolio_loader = None
+portofolio_loader = DirectoryLoader("../data", glob="**/*.md", loader_cls=TextLoader)
+document += portofolio_loader.load()
 
-for file in os.listdir("../data"):
-    if not os.path.isfile(file): continue
-    portofolio_loader = TextLoader(file)
-    document += portofolio_loader.load()
-
+print("Number of document loaded :",len(document))
