@@ -1,4 +1,4 @@
-## ✦ Compétences - Skills and Craft ✦
+## ✦ Competences - Technical stacks, Skills and Craft ✦
 *The tools and technologies behind the work*
 
 ### Programming Languages & Scripting
