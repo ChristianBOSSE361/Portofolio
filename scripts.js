@@ -81,3 +81,86 @@ document.querySelectorAll('.formation-carte').forEach(carte => {
     carte.classList.toggle('retournee');
   });
 });
+
+// ==========================================
+// CHATBOT WIDGET
+// ==========================================
+const chatToggleBtn  = document.getElementById("chat-toggle-btn");
+const chatWindow     = document.getElementById("chat-window");
+const chatCloseBtn   = document.getElementById("chat-close-btn");
+const chatInput      = document.getElementById("chat-input");
+const chatSendBtn    = document.getElementById("chat-send-btn");
+const chatMessages   = document.getElementById("chat-messages");
+const chatTyping     = document.getElementById("chat-typing");
+const chatIconOpen   = document.getElementById("chat-icon-open");
+const chatIconClose  = document.getElementById("chat-icon-close");
+
+// --- URL de ton API FastAPI (à modifier si tu changes de port)
+const API_URL = "http://127.0.0.1:8000/api/chat";
+
+// --- Ouvrir / Fermer la fenêtre du chat
+function toggleChat() {
+  const isOpen = chatWindow.classList.contains("chat-open");
+  chatWindow.classList.toggle("chat-open");
+  chatWindow.setAttribute("aria-hidden", isOpen ? "true" : "false");
+  chatIconOpen.style.display  = isOpen ? "block" : "none";
+  chatIconClose.style.display = isOpen ? "none"  : "block";
+  if (!isOpen) chatInput.focus();
+}
+chatToggleBtn.addEventListener("click", toggleChat);
+chatCloseBtn.addEventListener("click",  toggleChat);
+
+// --- Ajouter une bulle de message dans la fenêtre
+function appendMessage(text, role) {
+  const msgDiv    = document.createElement("div");
+  msgDiv.className = `chat-msg ${role}`; // "bot" ou "user"
+
+  const bubble    = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.textContent = text;
+
+  msgDiv.appendChild(bubble);
+  chatMessages.appendChild(msgDiv);
+
+  // Scroll automatique vers le bas
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// --- Envoyer une question à l'API
+async function sendMessage() {
+  const question = chatInput.value.trim();
+  if (!question) return;
+
+  // Afficher la question de l'utilisateur
+  appendMessage(question, "user");
+  chatInput.value = "";
+
+  // Afficher l'indicateur de frappe (⋯)
+  chatTyping.style.display = "block";
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: question }),
+    });
+
+    if (!response.ok) throw new Error("Erreur serveur : " + response.status);
+
+    const data = await response.json();
+    chatTyping.style.display = "none";
+    appendMessage(data.answer, "bot");
+
+  } catch (error) {
+    chatTyping.style.display = "none";
+    appendMessage("⚠️ Sorry, I'm having trouble connecting to the server. Please try again later.", "bot");
+    console.error("Chatbot error:", error);
+  }
+}
+
+// --- Déclencheurs d'envoi (bouton + touche Entrée)
+chatSendBtn.addEventListener("click", sendMessage);
+chatInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
