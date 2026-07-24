@@ -6,6 +6,7 @@ from langchain_community.document_loaders import PyPDFLoader, TextLoader, Direct
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
+
 # help(PyPDFLoader)
 
 # == INITIALIZATION ==
@@ -24,7 +25,7 @@ document = cv_loader.load()
 portofolio_loader = DirectoryLoader("../data", glob="**/*.md", loader_cls=TextLoader)
 document += portofolio_loader.load()
 
-print("Number of document loaded :",len(document))
+print("==> Number of document loaded :",len(document))
 
 
 # === CREATION OF THE VECTOR DARA BASE ===
@@ -53,15 +54,15 @@ db = Chroma.from_documents(
     documents = chunks,
     embedding = hf_model,
     collection_name = "portofolio_collection",
-    persist_directory = "vectorstore/",
+    persist_directory = "vectorstore",
 )
-print("==> Vector data base succesfuly created.")
+print("==> Vector data base successfuly created.")
 
-# test
-results = db.similarity_search(query = "what are my programming languages ?", k = 3)
-
+# # test
+results = db.similarity_search(query = "Who is Christian", k = 3)
+print(type(results[0]))
 for r in results:
-    print()
+    print("=========")
     print(r.page_content)
     print(r.metadata)
-    print("----")
+    print("=========")
