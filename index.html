@@ -872,6 +872,71 @@ CV (English Version)</a>
 </div>
 </div>
 </section>
+
+<!-- ======== CHATBOT ======== -->
+
+<!-- Bouton flottant pour ouvrir/fermer le chat -->
+<button id="chat-toggle-btn" aria-label="Ouvrir le chatbot">
+  <svg id="chat-icon-open" viewBox="0 0 24 24" width="26" fill="currentColor">
+    <path d="M12 2C6.48 2 2 6.02 2 11c0 2.77 1.26 5.25 3.25 6.95L4 22l4.36-1.7A10.07 10.07 0 0 0 12 21c5.52 0 10-4.02 10-9S17.52 2 12 2zm1 13H7v-2h6v2zm2-4H7V9h8v2z"/>
+  </svg>
+  <svg id="chat-icon-close" viewBox="0 0 24 24" width="26" fill="currentColor" style="display:none;">
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+  </svg>
+</button>
+<!-- Fenêtre du chatbot -->
+<div id="chat-window" class="chat-window" aria-hidden="true">
+  
+  <!-- Header -->
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar"> 🤖 </div>
+      <div>
+        <p class="chat-header-name">ONYX Christian's AI Assistant</p>
+        <p class="chat-header-status"><span class="chat-status-dot"></span> Online</p>
+      </div>
+    </div>
+    <button id="chat-close-btn" class="chat-header-close" aria-label="Fermer">
+      <svg viewBox="0 0 24 24" width="18" fill="currentColor">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Zone de messages -->
+  <div id="chat-messages" class="chat-messages">
+    <!-- Message de bienvenue initial -->
+    <div class="chat-msg bot">
+      <div class="chat-bubble">
+        👋 Hi! My name is Onyx, I'm Christian's AI assistant. How can I help you 😊 ? 
+      </div>
+    </div>
+  </div>
+  <!-- Indicateur de frappe (caché par défaut) -->
+  <div id="chat-typing" class="chat-typing" style="display:none;">
+    <div class="chat-bubble">
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+    </div>
+  </div>
+  <!-- Zone de saisie -->
+  <div class="chat-input-zone">
+    <input
+      type="text"
+      id="chat-input"
+      class="chat-input"
+      placeholder="Ask me something..."
+      autocomplete="off"
+    />
+    <button id="chat-send-btn" class="chat-send-btn" aria-label="Envoyer">
+      <svg viewBox="0 0 24 24" width="20" fill="currentColor">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+
 <!-- FOOTER -->
 <footer class="footer">
 © Christian BOSSE · Last Update : July 2026.
