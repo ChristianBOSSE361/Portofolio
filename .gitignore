@@ -2,4 +2,6 @@ true_index.html
 backend/env
 backend/test.ipynb
 backend/.env
+backend/vectorstore
+backend/__pycache__
 text.txt

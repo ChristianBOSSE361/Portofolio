@@ -12,7 +12,7 @@ from langchain_chroma import Chroma
 # == INITIALIZATION ==
 CV = "../data/CVs/CV_BOSSE_July_3_eng.pdf"
 model_name    = "sentence-transformers/all-MiniLM-L6-v2" # name of the model to use from huggingface
-model_kwargs  = {"device":"cuda"}
+model_kwargs  = {"device":"cpu"}
 encode_kwargs = {"normalize_embeddings": True}
 
 # ==== LOADINGS ====
