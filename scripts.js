@@ -95,8 +95,8 @@ const chatTyping     = document.getElementById("chat-typing");
 const chatIconOpen   = document.getElementById("chat-icon-open");
 const chatIconClose  = document.getElementById("chat-icon-close");
 
-// --- URL de ton API FastAPI (à modifier si tu changes de port)
-const API_URL = "http://127.0.0.1:8000/api/chat";
+// --- URL de API FastAPI
+const API_URL = "https://portofolio-tw1d.onrender.com";
 
 // --- Ouvrir / Fermer la fenêtre du chat
 function toggleChat() {
