@@ -1210,8 +1210,8 @@ html {
   bottom: 2rem;
   right: 2rem;
   z-index: 2000;
-  width: 3.7rem;
-  height: 3.7rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -1234,8 +1234,8 @@ html {
   bottom: 6.5rem;
   right: 2rem;
   z-index: 1999;
-  width: 22.5rem;
-  max-height: 32.5rem;
+  width: 25rem;
+  max-height: 34rem;
   border-radius: 1.3rem;
   background: rgba(15, 18, 50, 0.96);
   backdrop-filter: blur(20px);
