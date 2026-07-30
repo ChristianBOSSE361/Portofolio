@@ -11,7 +11,7 @@ from langchain_chroma import Chroma
 # help(PyPDFLoader)
 
 # == INITIALIZATION ==
-CV = "../data/CVs/CV_BOSSE_July_3_eng.pdf"
+CV = "../data/CVs/CV_BOSSE_eng.pdf"
 model_name    = "sentence-transformers/all-MiniLM-L6-v2" # name of the model to use from huggingface
 model_kwargs  = {"device":"cpu"}
 encode_kwargs = {"normalize_embeddings": True}
@@ -62,11 +62,11 @@ db = Chroma.from_documents(
 )
 print("==> Vector data base successfuly created.")
 
-# # test
-results = db.similarity_search(query = "Who is Christian", k = 3)
-print(type(results[0]))
-for r in results:
-    print("=========")
-    print(r.page_content)
-    print(r.metadata)
-    print("=========")
+# # # test
+# results = db.similarity_search(query = "Who is Christian", k = 3)
+# print(type(results[0]))
+# for r in results:
+#     print("=========")
+#     print(r.page_content)
+#     print(r.metadata)
+#     print("=========")
