@@ -96,7 +96,7 @@ const chatIconOpen   = document.getElementById("chat-icon-open");
 const chatIconClose  = document.getElementById("chat-icon-close");
 
 // --- URL de API FastAPI
-const API_URL = "https://portofolio-tw1d.onrender.com";
+const API_URL = "https://portofolio-tw1d.onrender.com/api/chat";
 
 // --- Ouvrir / Fermer la fenêtre du chat
 function toggleChat() {
