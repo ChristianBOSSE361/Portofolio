@@ -2,9 +2,10 @@
 import os
 import shutil
 
+from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader, TextLoader, DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_chroma import Chroma
 
 # help(PyPDFLoader)
@@ -16,6 +17,10 @@ model_kwargs  = {"device":"cpu"}
 encode_kwargs = {"normalize_embeddings": True}
 
 # ==== LOADINGS ====
+load_dotenv()
+
+if not os.getenv("HF_TOKEN"):
+    raise ValueError("API KEY not found !!! ")
 
 # Loading of the CV
 cv_loader = PyPDFLoader(CV)
@@ -44,10 +49,9 @@ text_splitter = RecursiveCharacterTextSplitter(
 chunks = text_splitter.split_documents(document)
 
 # creation of the embeddings
-hf_model = HuggingFaceEmbeddings(
-    model_name = model_name,
-    model_kwargs = model_kwargs,
-    encode_kwargs = encode_kwargs
+hf_model = HuggingFaceEndpointEmbeddings(
+    model = model_name,
+    huggingfacehub_api_token = os.getenv("HF_TOKEN")
 )
 
 db = Chroma.from_documents(
