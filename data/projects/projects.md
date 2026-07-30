@@ -2,6 +2,9 @@
 ## ✦ Projets - What I've Built ✦
 *Ideas brought to life*
 
+## Machine learning and deep learning project
+All of these projects were developed not just to apply AI and ML models, but out of a deep desire to understand how they truly work and the fundamental concepts behind different algorithms.
+
 - [**Iris Classification**](https://github.com/ChristianBOSSE361/Artificial_Intelligence)  
   *Tags:* `PyTorch`, `OpenCV`  
   Classify iris flowers based on petal and sepal measurements.
@@ -34,6 +37,7 @@
   *Tags:* `Scikit-learn`, `FastAPI`  
   Generate a model able to answer questions about a document using RAG, with an interactive interface.
 
+## GPU project
 - [**GPU Computing**](https://github.com/ChristianBOSSE361/GPU-Computing)  
   *Tags:* `CUDA`, `C++`  
  
