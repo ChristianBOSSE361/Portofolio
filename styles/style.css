@@ -126,10 +126,16 @@
   padding:    0;
   box-sizing: border-box;
 }
+
+html {
+  overflow-x: hidden; 
+}
+
 body {
   font-family: var(--front-main);
   background:  var(--couleur-fond);
   color:       var(--couleur-texte);
+  overflow-x: hidden;
 }
 
 
@@ -412,9 +418,10 @@ body {
   margin: 0 auto;
 
   display: flex;
+  flex-direction: column;       
   align-items: center;
-  justify-content: space-between;
-  gap: 60px;
+  text-align: center;           
+  gap: 2rem;                   
 }
 
 .about-text {
@@ -452,16 +459,11 @@ body {
   margin-bottom: 12px;
 }
 
-.about-container {
-  flex-direction: column;
-  text-align: center;
-}
-
 /* === FORMATION SECTION === */
 .formation {
   padding:    4rem 0.5rem;
   position:   relative;   /* contexte pour les enfants absolute */
-  overflow:   visible;     /* coupe les nébuleuses qui débordent */
+  overflow:   hidden;     /* empêche les nébuleuses de créer un scroll horizontal */
 }
 
 .section-titre {
