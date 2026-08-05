@@ -34,12 +34,12 @@ db = Chroma(persist_directory =  "vectorstore",
             collection_name= "portofolio_collection")
 
 results = db.similarity_search(query = "Who is Christian", k = 3)
-print(type(results[0]))
-for r in results:
-    print("=========")
-    print(r.page_content)
-    print(r.metadata)
-    print("=========")
+# print(type(results[0]))
+# for r in results:
+#     print("=========")
+#     print(r.page_content)
+#     print(r.metadata)
+#     print("=========")
 
 # Creation of the retierver
 retriever = db.as_retriever(
