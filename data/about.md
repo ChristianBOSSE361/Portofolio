@@ -1,12 +1,12 @@
 
 # Christian BOSSE
-### Aspiring AI, ML, Data & Software Engineer
-> Student at Grenoble INP - Ensimag | Double Degree: MMIS (Final year) & Master's in Artificial Intelligence
+### Aspiring AI/ML Engineer & Data Scientist
+Double Degree: Engineering Degree (Computer Science and Applied Mathematics) & Master in Artificial Intelligence | Grenoble INP - Ensimag | 2026 Graduate
 
 *You want to know a bit more about me... WELCOME!!!*
 ---
 ## ✦ About - The Story behind: Who is Christian? ✦
-Christian is currently an Engineering Student at Grenoble - INP Ensimag in Final Year and in Master Artificial Intelligence.
+Christian recently graduated from Grenoble INP - Ensimag with an Engineering Degree in Computer Science and Applied Mathematics, as well as a Master's degree in Artificial Intelligence.
 
 He is a very curious, disciplined, reflective person, love challenges and a hardworker. He carefully considers things and seeks the most appropriate approach before taking action. He enjoys learning, thinking deeply, and takes real pleasure in what he does.
 

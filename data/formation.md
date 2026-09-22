@@ -31,7 +31,7 @@
 
 ### 3. Preparatory Classes for the Grandes Schools (2021 - 2023)
 
-- **School :** Grenoble Alpes University & Grenoble INP - Ensimag (Lycée Français Blaise Pascal)
+- **School :** Lycée Français Blaise Pascal d'Abidjan
 - **Place and duration :** 📍 Abidjan, Côte d'Ivoire | ⏱ 2 years
 - **Matières :** Mathematics, Physics, Computer Science, English, Spanish
 

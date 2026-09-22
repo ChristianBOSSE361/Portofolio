@@ -8,4 +8,4 @@
 - 📄 **CV (French Version):** [Dowload the CV](data/CV_BOSSE_July_3_fr.pdf)
 - 📄 **CV (English version):** [Download Resume](data/CV_BOSSE_July_3_eng.pdf)
 ---
-*© Christian BOSSE · Last Update : July 2026*
+*© Christian BOSSE · Last Update : September 2026*

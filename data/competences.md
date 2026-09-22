@@ -6,4 +6,4 @@
 ### AI | Data Science | ML & DL
 - PyTorch, Scikit-learn, Pandas, NumPy, SQL, Matplotlib, Hugging Face, Apache Spark, NLTK
 ### Development & Hardware Tools
-- Git, GitLab, GitHub, Docker, JavaScript, CSS, HTML, RISC-V, VHDL
+- Git, GitLab, GitHub, Docker, CI/CD, JavaScript, CSS, HTML, RISC-V, VHDL

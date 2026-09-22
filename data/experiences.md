@@ -5,7 +5,13 @@
 
 - **Duration :** April 2026 - September 2026
 - **Entreprise :** (Groupe) Astek — Île-de-France, France
-- **Description :** Development of an AI-based Pentesting agent using Reinforcement Learning.
+- **Description :** 
+  - Implemented a transcription merging algorithm combining WhisperX and FrWhisper outputs to enrich transcription results;
+  - Developed an autonomous AI pentesting agent using Reinforcement Learning  (PPO, A2C, DQN via Stable-Baselines3, RecurrentPPO) within a custom Gymnasium environment;
+  - Designed and implemented a real-time training monitoring dashboard  to visualize agent performance metrics;
+  - Defined and set up evaluation methods and metrics to assess agent effectiveness  across multiple RL algorithms; 
+  - Containerized the training environment using Docker for deployment on a shared server
+
 - **Technologies :** `Python`, `Git`, `GitLab`, `Docker`, `Reinforcement Learning`, `stablebaseline3`, `Gymnasium`
 
 ### 2. NLP / ASR Research Engineer Intern
