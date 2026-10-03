@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from chatbot import rag_chain
-
+from chatbot import *
+    
 # creation of the application
 app = FastAPI()
 
@@ -19,6 +19,7 @@ app.add_middleware(
 # Structure of the question
 class QuestionRequest(BaseModel):
     question : str
+    session_id : str
 
 # The endpoints
 @app.get("/")
@@ -28,5 +29,18 @@ def read_root():
 
 @app.post("/api/chat")
 def chat_endpoint(query : QuestionRequest):
-    answer = rag_chain.invoke(query.question)
+
+    # get of the history
+    history = get_session_history(query.session_id)
+    
+    # generation of the answer
+    answer = rag_chain.invoke( { "query" : query.question , "chat_history" : history.messages })
+
+    # adding the information in the history
+    history.add_message(HumanMessage(query.question))
+    history.add_message(AIMessage(answer))
+
+    # saving the history of the session 
+    save_session_history(query.session_id, history)
+
     return {"answer": answer}

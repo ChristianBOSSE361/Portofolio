@@ -1,13 +1,19 @@
 #!usr/env/bin python3
 import os
+import redis
+import json
 
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import  RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_core.messages import messages_from_dict, messages_to_dict , HumanMessage, AIMessage
+
+from operator import itemgetter
 
 # help(HuggingFaceEndpointEmbeddings)
 
@@ -19,7 +25,7 @@ encode_kwargs = {"normalize_embeddings": True}
 # Loading the API key
 load_dotenv()
 
-if not os.getenv("GROQ_API_KEY") or not os.getenv("HF_TOKEN"):
+if not os.getenv("GROQ_API_KEY") or not os.getenv("HF_TOKEN") or not os.getenv("REDIS_URL"):
     raise ValueError(" API KEYS NOT FOUND !!!")
 
 # Loading of the embedding model
@@ -33,7 +39,7 @@ db = Chroma(persist_directory =  "vectorstore",
             embedding_function = hf_model,
             collection_name= "portofolio_collection")
 
-results = db.similarity_search(query = "Who is Christian", k = 3)
+# results = db.similarity_search(query = "Who is Christian", k = 3)
 # print(type(results[0]))
 # for r in results:
 #     print("=========")
@@ -45,7 +51,7 @@ results = db.similarity_search(query = "Who is Christian", k = 3)
 retriever = db.as_retriever(
     search_type = "mmr", # to find the most simmilary but also different chunks
     search_kwargs = { "k":3, # maximum number of value returned
-                     "fetch_k":10 , # number of chunks of to select first before chosing
+                     "fetch_k":10 , # number of chunks to select first before chosing
                      "lambda_mult": 0.7 # diversity of the result
                     }
 )
@@ -57,7 +63,30 @@ llm = ChatGroq(
     temperature = 0.2,
 )
 
+
+# === CONTEXT MANAGMENT ===
+# (using Redis)
+
+r = redis.Redis.from_url(os.getenv("REDIS_HF"))
+
+# Get the history from the Redis and add  it on the local history for the LLM
+def get_session_history(session_id : str) -> ChatMessageHistory:
+    chat = r.get(f"chat:{session_id}")
+    history = ChatMessageHistory()
+
+    if chat :
+        dicts = json.loads(chat)
+        messages = messages_from_dict(dicts)
+        history.add_messages(messages)
+        
+    return history
+
+# Save the history of the session on Redis
+def save_session_history(session_id: str, history : ChatMessageHistory):
+    r.set(f"chat:{session_id}", json.dumps(messages_to_dict(history.messages)), ex=3600) # expire après 1h
+
 # === CREATION OF THE PROMPT AND LAUNCHING ===
+
 # Creation of the prompt
 system_prompt = """
 You are Onyx, the AI assistant embedded in Christian BOSSE's personal portfolio website.
@@ -87,9 +116,9 @@ Context:
 {context}
 """
 
-
 prompt = ChatPromptTemplate([
     ("system", system_prompt),
+    MessagesPlaceholder("chat_history", n_messages = 20),
     ("human","{query}")
 ])
 
@@ -99,8 +128,8 @@ def doc_to_str(documents):
 
 # RAG Chain
 setup = {
-    "context": retriever | doc_to_str ,
-    "query" : RunnablePassthrough()
+    "context": itemgetter("query") | retriever | doc_to_str ,
+    "query" : itemgetter("query") | RunnablePassthrough()
 }
 
 rag_chain = setup | prompt | llm | StrOutputParser()

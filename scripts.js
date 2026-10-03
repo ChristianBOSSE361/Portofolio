@@ -99,6 +99,14 @@ const chatIconClose  = document.getElementById("chat-icon-close");
 const API_URL = "https://portofolio-tw1d.onrender.com/api/chat";
 // const API_URL = "http://localhost:8000/api/chat";
 
+// --- Génération de l'Id de la session ---
+session_id = localStorage.getItem("session_id");
+
+if (!session_id) {
+  session_id = crypto.randomUUID();
+  localStorage.setItem("session_id", session_id);
+}
+
 // --- Ouvrir / Fermer la fenêtre du chat
 function toggleChat() {
   const isOpen = chatWindow.classList.contains("chat-open");
@@ -145,7 +153,10 @@ async function sendMessage() {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: question }),
+      body: JSON.stringify({
+        question: question,
+        session_id: session_id
+      }),
     });
 
     if (!response.ok) throw new Error("Erreur serveur : " + response.status);
