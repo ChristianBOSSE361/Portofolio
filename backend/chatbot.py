@@ -67,7 +67,7 @@ llm = ChatGroq(
 # === CONTEXT MANAGMENT ===
 # (using Redis)
 
-r = redis.Redis.from_url(os.getenv("REDIS_HF"))
+r = redis.Redis.from_url(os.getenv("REDIS_URL"))
 
 # Get the history from the Redis and add  it on the local history for the LLM
 def get_session_history(session_id : str) -> ChatMessageHistory:
