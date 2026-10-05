@@ -6,7 +6,7 @@ import json
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables import  RunnablePassthrough
+from langchain_core.runnables import  RunnablePassthrough ,  RunnableLambda , RunnableParallel
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
@@ -50,8 +50,8 @@ db = Chroma(persist_directory =  "vectorstore",
 # Creation of the retierver
 retriever = db.as_retriever(
     search_type = "mmr", # to find the most simmilary but also different chunks
-    search_kwargs = { "k":3, # maximum number of value returned
-                     "fetch_k":10 , # number of chunks to select first before chosing
+    search_kwargs = { "k":5, # maximum number of value returned
+                     "fetch_k":15 , # number of chunks to select first before chosing
                      "lambda_mult": 0.7 # diversity of the result
                     }
 )
@@ -91,22 +91,27 @@ def save_session_history(session_id: str, history : ChatMessageHistory):
 system_prompt = """
 You are Onyx, the AI assistant embedded in Christian BOSSE's personal portfolio website.
 Your role is to help visitors (recruiters, collaborators, curious people) learn about Christian's background, skills, projects, and experience.
-You are currently just a chatbot but you will be developed and became a completed AI assiatant.
+You are currently a chatbot, but you will be developed into a complete AI assistant.
 
 Your personality:
 - Warm, professional, and approachable
 - Enthusiastic about Christian's work without being arrogant
-- Concise but thorough - give enough detail to be helpful, not more
+- Concise but thorough: give enough detail to be helpful, not more
 
 Rules:
-1. ONLY use information from the context below to answer. Never invent or guess facts about Christian.
-2. If the context does not contain the answer, say something like:
-   "Humm... I don't have that information yet, but you can reach Christian directly at christianbosse123@gmail.com or on LinkedIn: https://www.linkedin.com/in/christian-bosse-6104a9332/ to have more information 😊."
-3. Always respond in the same language as the user's question.
-4. If the user greets you (e.g. "Hello", "Salut"), respond warmly and briefly introduce yourself and what you can help with.
-5. If the user asks something completely unrelated to Christian (e.g. math, politics, cooking), politely redirect:
-   "I could answer that question but... I'm specialized in answering questions about Christian's profile. Feel free to ask about his skills, projects, education, or experience!"
-6. Format your answers for readability:
+1. Base your answers ONLY on the context below and on the conversation history. Never invent facts about Christian (dates, companies, grades, skills, etc.).
+2. If the context only covers part of the question, answer what you know and clearly say what is missing.
+3. If the context contains nothing useful, say something like:
+   "Humm... I don't have that information yet, but you can reach Christian directly at christianbosse123@gmail.com or on LinkedIn: https://www.linkedin.com/in/christian-bosse-6104a9332/ for more details 😊"
+4. Always respond in the same language as the user's question.
+5. If the user greets you (e.g. "Hello", "Salut"), respond warmly and briefly introduce yourself and what you can help with.
+6. Use the conversation history to understand follow-up questions (e.g. "and his internship?", "tell me more").
+7. Topics that are IN SCOPE: Christian's education, experience, skills, projects, availability, goals, mindset, hobbies, contact, this portfolio and this chatbot (how it was built, its stack).
+    If you are in doubt, consider the question in scope and try to answer.
+8. Only refuse requests that are clearly unrelated to Christian (e.g. math problems, recipes, politics, writing code for the user, general trivia). In that case, politely redirect in your own words, for example:
+   "That's a bit outside my area! 🤔 I could answer but ... I'm here to talk about Christian's profile. Feel free to ask about his skills, projects, education or experience."
+9. Generic technical questions (e.g. "What is RAG?", "What is ML") can be answered in 1-2 sentences, then linked back to Christian's work if relevant.
+10. Format your answers for readability:
    - Use bullet points (•) for lists
    - Use bold for key information (names of schools, job titles, technologies)
    - Keep paragraphs short (2-3 sentences max)
@@ -122,18 +127,39 @@ prompt = ChatPromptTemplate([
     ("human","{query}")
 ])
 
+# Improvement of the query given by the user
+condense_prompt = ChatPromptTemplate([
+    ("system",
+     "Given the conversation history and the user's latest question, rewrite the "
+     "question so it is fully standalone (understandable without the history). "
+     "The conversation is about Christian BOSSE. "
+     "Do NOT answer the question. Return ONLY the rewritten question, in the same language. "
+     "If the question is already standalone, return it unchanged."),
+    MessagesPlaceholder("chat_history", n_messages=5),
+    ("human", "{query}")
+])
+
+# Reformulation chain
+condense_chain = condense_prompt | llm | StrOutputParser()
+
 # Function to transform Document type into string
 def doc_to_str(documents):
     return "\n\n".join([doc.page_content for doc in documents])
 
+# Rewrites the question only if there is a history
+def contextualize(inputs):
+    if not inputs.get("chat_history"):
+        return inputs["query"]          # first message: nothing to rewrite
+    return condense_chain.invoke(inputs)
+
 # RAG Chain
 setup = {
-    "context": itemgetter("query") | retriever | doc_to_str ,
-    "query" : itemgetter("query") | RunnablePassthrough()
+    "context": RunnableLambda(contextualize) | retriever | doc_to_str ,
+    "query" : itemgetter("query"),
+    "chat_history": itemgetter("chat_history")
 }
 
 rag_chain = setup | prompt | llm | StrOutputParser()
 
 # answer = rag_chain.invoke("C'est quoi le mindset de Christian ?")
 # print("ANSWER :\n",answer)
-
