@@ -4,7 +4,6 @@ import redis
 import json
 
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import  RunnablePassthrough ,  RunnableLambda , RunnableParallel
 from langchain_core.output_parsers import StrOutputParser
@@ -14,25 +13,20 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.messages import messages_from_dict, messages_to_dict , HumanMessage, AIMessage
 
 from operator import itemgetter
-
-# help(HuggingFaceEndpointEmbeddings)
+from embeddings import LocalEmbeddings
 
 # === INITIALIZATION ===
-model_name    = "sentence-transformers/all-MiniLM-L6-v2" # name of the model to use from huggingface
 model_kwargs  = {"device":"cpu"}
 encode_kwargs = {"normalize_embeddings": True}
 
 # Loading the API key
 load_dotenv()
 
-if not os.getenv("GROQ_API_KEY") or not os.getenv("HF_TOKEN") or not os.getenv("REDIS_URL"):
+if not os.getenv("GROQ_API_KEY") or not os.getenv("REDIS_URL"):
     raise ValueError(" API KEYS NOT FOUND !!!")
 
 # Loading of the embedding model
-hf_model = HuggingFaceEndpointEmbeddings(
-    model = model_name,
-    huggingfacehub_api_token = os.getenv("HF_TOKEN")
-)
+hf_model = LocalEmbeddings()
 
 # Loading of the data
 db = Chroma(persist_directory =  "vectorstore",
