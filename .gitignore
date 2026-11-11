@@ -4,4 +4,5 @@ backend/test.ipynb
 backend/.env
 backend/vectorstore
 backend/__pycache__
+backend/models_cache
 text.txt
